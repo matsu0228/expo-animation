@@ -6,8 +6,10 @@ import { AnimationList } from "./src/AnimationList";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>アニメーションサンプル(SDK40)</Text>
-      <AnimationList />
+      <Text style={styles.title} numberOfLines={2}>
+        アニメーションサンプル　 - (SDK 40 + Reanimated)
+      </Text>
+      <AnimationList style={{ marginTop: 80 }} />
       <StatusBar style="auto" />
     </View>
   );
@@ -20,5 +22,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: { fontSize: 24, marginBottom: 12 },
+  title: {
+    width: "80%",
+    fontSize: 24,
+    marginBottom: 12,
+    alignItems: "center",
+    alignSelf: "center",
+  },
 });

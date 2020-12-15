@@ -7,10 +7,12 @@ import { AnimationIcon } from "./AnimationIcon";
 type State = {
   icons: string[];
 };
-type Props = {};
+type Props = {
+  style?: any;
+};
 const ICON_LIST = ["😄", "🤣", "😊", "😇", "😍", "😎"];
 
-export const AnimationList: React.FC<Props> = () => {
+export const AnimationList: React.FC<Props> = ({ style = null }) => {
   const [icons, setIcons] = useState<string[]>([]);
   const getDelay = (): number => {
     return Math.floor(Math.random() * 10);
@@ -19,13 +21,16 @@ export const AnimationList: React.FC<Props> = () => {
     return sample(ICON_LIST)!;
   };
 
+  const animations = (
+    <View style={styles.iconWrapper}>
+      {icons.map((icon, i) => (
+        <AnimationIcon icon={icon} key={`animation_${i}`} />
+      ))}
+    </View>
+  );
+
   return (
-    <View style={styles.container}>
-      <View style={styles.iconWrapper}>
-        {icons.map((icon, i) => (
-          <AnimationIcon icon={icon} key={`animation_${i}`} />
-        ))}
-      </View>
+    <View style={[styles.container, style]}>
       <TouchableOpacity
         style={styles.btn}
         onPress={() => {
@@ -34,7 +39,18 @@ export const AnimationList: React.FC<Props> = () => {
       >
         <Text style={styles.btnText}>ここを押す</Text>
       </TouchableOpacity>
+      {/*
+      <TouchableOpacity
+        style={[styles.btn, { marginTop: 16 }]}
+        onPress={() => {
+          setIcons([]);
+        }}
+      >
+        <Text style={styles.btnText}>Clear</Text>
+      </TouchableOpacity>
+      */}
       <Text style={styles.text}>アニメーション数 : {icons.length}</Text>
+      {animations}
     </View>
   );
 };
